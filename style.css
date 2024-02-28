@@ -46,17 +46,19 @@ body {
   color: #f9f4f5;
 }
 
-#reset-btn {
+/* #reset-btn {
   height: 8vh;
   width: 25vh;
   background-color: #70587c;
-  /* color: #F9F4F5; */
+  color: #F9F4F5;
   border: none;
   border-radius: 1rem;
   font-size: 3vmin;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
   margin-right: 3vmin;
-}
+} */
+
+
 
 #new-btn {
   height: 8vh;
@@ -68,6 +70,7 @@ body {
   font-size: 3vmin;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
   margin-left: 3vmin;
+  cursor: pointer;
 }
 
 .msg-container {
@@ -95,4 +98,10 @@ body {
 
 .hide {
   display: none;
+}
+
+
+
+@media screen and (min-width:600px) {
+  
 }

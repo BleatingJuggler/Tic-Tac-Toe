@@ -1,6 +1,6 @@
 let boxes = document.querySelectorAll(".box");
 console.log(boxes);
-let resetButton = document.querySelector("#reset-btn");
+// let resetButton = document.querySelector("#reset-btn");
 let newGameButton = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-box");
 let message = document.querySelector("#msg");
@@ -18,11 +18,13 @@ let winningPatterns = [
   [6, 7, 8],
 ];
 
-const resetGame = () => {
+// New Game Function
+const playNewGame = () => {
     turnOfPlayerX = true;
     enableBoxes();
     msgContainer.classList.add("hide")
 }
+
 
 boxes.forEach((box)=>{
     box.addEventListener("click",()=>{
@@ -39,16 +41,15 @@ boxes.forEach((box)=>{
     })
 })
 
-resetButton.addEventListener("click",()=>{
-    console.log("Reset Button clicked");
-})
 
+// Disable Boxes
 const disabledBoxes = () =>{
     for(let box of boxes){
         box.disabled = true;
     }
 }
 
+// Enable Boxes
 const enableBoxes = () =>{
     for(let box of boxes){
         box.disabled = false;
@@ -56,12 +57,15 @@ const enableBoxes = () =>{
     }
 }
 
+
+// Show Winner
 const showWinner = (winner) => {
     message.innerText = `${winner} Won`;
     msgContainer.classList.remove("hide")
     disabledBoxes();
 }
 
+// Check Winner 
 const checkWinner = () => {
     for(let pattern of winningPatterns){
         // console.log(pattern);
@@ -79,12 +83,34 @@ const checkWinner = () => {
                 showWinner(pos1Val);
                
             }
+            // else{
+            //     message.innerText = "It's a Draw";
+            //     msgContainer.classList.remove("hide");
+            //     disabledBoxes();
+            // }
         }
     }
 
 }
 
-resetButton.addEventListener("click", resetGame);
-newGameButton.addEventListener("click", resetGame);
+
+
+
+
+
+
+
+
+
+
+// resetButton.addEventListener("click",()=>{
+//     console.log("Reset Button clicked");
+// })
+
+
+
+
+// resetButton.addEventListener("click", resetGame);
+newGameButton.addEventListener("click", playNewGame);
 
 
