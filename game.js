@@ -4,7 +4,11 @@ console.log(boxes);
 let newGameButton = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-box");
 let message = document.querySelector("#msg");
+let player1Score = document.querySelector("#player1-score");
+let player2Score = document.querySelector("#player2-score");
 
+let player1ScoreCounter = 0;
+let player2ScoreCounter = 0;
 let turnOfPlayerX = true;
 
 let winningPatterns = [
@@ -58,10 +62,16 @@ const enableBoxes = () =>{
 }
 
 
+// Score-Tracker
+const scores = (winner) => {
+    player1Score.innerText = player1ScoreCounter;
+    player2Score.innerText = player2ScoreCounter;
+}
+
 // Show Winner
 const showWinner = (winner) => {
     message.innerText = `${winner} Won`;
-    msgContainer.classList.remove("hide")
+    msgContainer.classList.remove("hide");
     disabledBoxes();
 }
 
@@ -69,7 +79,7 @@ const showWinner = (winner) => {
 const checkWinner = () => {
     for(let pattern of winningPatterns){
         // console.log(pattern);
-        console.log(pattern[0], pattern[1],pattern[2]);
+        // console.log(pattern[0], pattern[1],pattern[2]);
         // console.log(boxes[pattern[0]],boxes[pattern[1]],boxes[pattern[2]]);
         // console.log(boxes[pattern[0]].innerText)
 
@@ -81,7 +91,15 @@ const checkWinner = () => {
         if(pos1Val != "" && pos2Val != "" && pos3Val != ""){
             if(pos1Val === pos2Val && pos2Val === pos3Val){
                 showWinner(pos1Val);
-               
+                console.log(pos1Val);
+                if(pos1Val=="X"){
+                    ++player1ScoreCounter;
+                    console.log(player1ScoreCounter);
+                }else{
+                    ++player2ScoreCounter;
+                    console.log(player2ScoreCounter);
+                }
+               scores(pos1Val);
             }
             // else{
             //     message.innerText = "It's a Draw";
