@@ -10,16 +10,17 @@ let player2Score = document.querySelector("#player2-score");
 let player1ScoreCounter = 0;
 let player2ScoreCounter = 0;
 let turnOfPlayerX = true;
+turnCount = 0;
 
 let winningPatterns = [
-  [0, 1, 2],
-  [0, 3, 6], 
-  [0, 4, 8],
-  [1, 4, 7],
-  [2, 4, 6],
-  [2, 5, 8],
-  [3, 4, 5],
-  [6, 7, 8],
+    [0, 1, 2],
+    [0, 3, 6],
+    [0, 4, 8],
+    [1, 4, 7],
+    [2, 4, 6],
+    [2, 5, 8],
+    [3, 4, 5],
+    [6, 7, 8],
 ];
 
 // New Game Function
@@ -30,13 +31,15 @@ const playNewGame = () => {
 }
 
 
-boxes.forEach((box)=>{
-    box.addEventListener("click",()=>{
-        // console.log("Box was clicked")
-        if(turnOfPlayerX===true){
+boxes.forEach((box) => {
+    box.addEventListener("click", () => {
+        console.log("Box was clicked")
+        turnCount++;
+        console.log(turnCount);
+        if (turnOfPlayerX === true) {
             box.innerText = "X";
             turnOfPlayerX = false;
-        }else{
+        } else {
             box.innerText = "O";
             turnOfPlayerX = true;
         }
@@ -47,15 +50,15 @@ boxes.forEach((box)=>{
 
 
 // Disable Boxes
-const disabledBoxes = () =>{
-    for(let box of boxes){
+const disabledBoxes = () => {
+    for (let box of boxes) {
         box.disabled = true;
     }
 }
 
 // Enable Boxes
-const enableBoxes = () =>{
-    for(let box of boxes){
+const enableBoxes = () => {
+    for (let box of boxes) {
         box.disabled = false;
         box.innerText = "";
     }
@@ -77,7 +80,7 @@ const showWinner = (winner) => {
 
 // Check Winner 
 const checkWinner = () => {
-    for(let pattern of winningPatterns){
+    for (let pattern of winningPatterns) {
         // console.log(pattern);
         // console.log(pattern[0], pattern[1],pattern[2]);
         // console.log(boxes[pattern[0]],boxes[pattern[1]],boxes[pattern[2]]);
@@ -88,24 +91,29 @@ const checkWinner = () => {
         let pos3Val = boxes[pattern[2]].innerText;
 
 
-        if(pos1Val != "" && pos2Val != "" && pos3Val != ""){
-            if(pos1Val === pos2Val && pos2Val === pos3Val){
+        if (pos1Val != "" && pos2Val != "" && pos3Val != "") {
+            if (pos1Val === pos2Val && pos2Val === pos3Val) {
                 showWinner(pos1Val);
                 console.log(pos1Val);
-                if(pos1Val=="X"){
+                if (pos1Val == "X") {
                     ++player1ScoreCounter;
                     console.log(player1ScoreCounter);
-                }else{
+                } else {
                     ++player2ScoreCounter;
                     console.log(player2ScoreCounter);
                 }
-               scores(pos1Val);
+                turnCount = 0;
+                scores(pos1Val);
             }
-            // else{
-            //     message.innerText = "It's a Draw";
-            //     msgContainer.classList.remove("hide");
-            //     disabledBoxes();
-            // }
+            else {
+                if (turnCount == 9) {
+                    message.innerText = "It's a Draw";
+                    msgContainer.classList.remove("hide");
+                    disabledBoxes();
+                    turnCount = 0;
+                }
+
+            }
         }
     }
 
