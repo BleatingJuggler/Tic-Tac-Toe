@@ -1,6 +1,5 @@
 let boxes = document.querySelectorAll(".box");
 console.log(boxes);
-// let resetButton = document.querySelector("#reset-btn");
 let newGameButton = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-box");
 let message = document.querySelector("#msg");
@@ -30,7 +29,7 @@ const playNewGame = () => {
     msgContainer.classList.add("hide")
 }
 
-
+// Event Listener on boxes
 boxes.forEach((box) => {
     box.addEventListener("click", () => {
         console.log("Box was clicked")
@@ -73,9 +72,16 @@ const scores = (winner) => {
 
 // Show Winner
 const showWinner = (winner) => {
-    message.innerText = `${winner} Won`;
-    msgContainer.classList.remove("hide");
-    disabledBoxes();
+    if(winner=="X"){
+        message.innerText = "Player 1 Won";
+        msgContainer.classList.remove("hide");
+        disabledBoxes();
+    }else{
+        message.innerText = "Player 2 Won";
+        msgContainer.classList.remove("hide");
+        disabledBoxes();
+    }
+    // message.innerText = `${winner} Won`;
 }
 
 // Check Winner 
